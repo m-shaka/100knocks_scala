@@ -42,13 +42,16 @@ object section1 extends App{
 
   // 与えられたシーケンス（文字列やリストなど）からn-gramを作る関数を作成せよ．この関数を用い，"I am an NLPer"という文から単語bi-gram，文字bi-gramを得よ．
   def p05() = {
-    
+
   }
 
   // "paraparaparadise"と"paragraph"に含まれる文字bi-gramの集合を，それぞれ, XとYとして求め，XとYの和集合，積集合，差集合を求めよ．さらに，'se'というbi-gramがXおよびYに含まれるかどうかを調べよ．
 
 
   // 引数x, y, zを受け取り「x時のyはz」という文字列を返す関数を実装せよ．さらに，x=12, y="気温", z=22.4として，実行結果を確認せよ．
+  def p07(x: Int, y: String, z: Double) = {
+    x + "時の" + y + "は" + z
+  }
 
 
   // 与えられた文字列の各文字を，以下の仕様で変換する関数cipherを実装せよ．
@@ -57,10 +60,24 @@ object section1 extends App{
   //     その他の文字はそのまま出力
   //
   // この関数を用い，英語のメッセージを暗号化・復号化せよ．
-
+  def p08(s: String) = {
+    s.map(c =>
+      if (c.isLower) (219 - c).toChar else c
+    )
+  }
 
   // スペースで区切られた単語列に対して，各単語の先頭と末尾の文字は残し，それ以外の文字の順序をランダムに並び替えるプログラムを作成せよ．ただし，長さが４以下の単語は並び替えないこととする．適当な英語の文（例えば"I couldn't believe that I could actually understand what I was reading : the phenomenal power of the human mind ."）を与え，その実行結果を確認せよ．
-
+  import scala.util.Random
+  def p09(s: String) = {
+    val wordsList = s.split("\\s+")
+    wordsList.map(
+      a => a match {
+        case a if a.length > 4 => a.head + Random.shuffle(a.substring(1, a.length - 1).toIterator).mkString + a.last
+        case a => a
+      }
+    ).mkString(" ")
+  }
+  println(p09("I couldn't believe that I could actually understand what I was reading : the phenomenal power of the human mind ."))
 
 
 }
